@@ -50,37 +50,39 @@ cc.Class({
     },
 
     update (dt) {
+        // 左右移动
         if (Input[cc.macro.KEY.a] || Input[cc.macro.KEY.left]) {
-            console.log('向左')
             this.sp.x = -1
-            // this.node.x -= this._speed * dt
         } else if (Input[cc.macro.KEY.d] || Input[cc.macro.KEY.right]) {
-            console.log('向右')
             this.sp.x = 1
-            // this.node.x += this._speed * dt
         } else {
             this.sp.x = 0
         }
+        // 上下移动
         if (Input[cc.macro.KEY.w] || Input[cc.macro.KEY.up]) {
-            console.log('向上')
             this.sp.y = 1
-            // this.node.y += this._speed * dt
         } else if (Input[cc.macro.KEY.s] || Input[cc.macro.KEY.down]) {
-            console.log('向下')
             this.sp.y = -1
-            // this.node.y -= this._speed * dt
         } else {
             this.sp.y = 0
         }
 
+        // 利用物理引擎控制移动
+        // 拿到 hero 当前的速度
+        this.lv = this.node.getComponent(cc.RigidBody).linearVelocity
+
         if (this.sp.x) {
-            this.node.x += this.sp.x * this._speed * dt
-        }
-        if (this.sp.y) {
-            this.node.y += this.sp.y * this._speed * dt
+            this.lv.y = 0
+            this.lv.x = this.sp.x * this._speed
+        } else if (this.sp.y) {
+            this.lv.x = 0
+            this.lv.y = this.sp.y * this._speed
         } else {
-            //
+            this.lv.x = this.lv.y = 0
         }
+
+        this.node.getComponent(cc.RigidBody).linearVelocity = this.lv
+
         let state = ''
         if (this.sp.x == 1) {
             state = 'hero_right'
