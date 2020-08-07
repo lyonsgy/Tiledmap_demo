@@ -81,10 +81,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 123
+        "__id__": 124
       },
       {
-        "__id__": 124
+        "__id__": 125
       }
     ],
     "_prefab": null,
@@ -177,7 +177,7 @@
       "array": [
         0,
         0,
-        490.1703785419923,
+        489.6020493707588,
         0,
         0,
         0,
@@ -273,6 +273,9 @@
       },
       {
         "__id__": 122
+      },
+      {
+        "__id__": 123
       }
     ],
     "_prefab": null,
@@ -4301,6 +4304,7 @@
     "dialogNode": {
       "__id__": 107
     },
+    "smog_enabled": true,
     "_id": "9cDslwhxFHZaMEH042qQsO"
   },
   {
@@ -4934,6 +4938,23 @@
       "height": 8.5
     },
     "_id": "8fbZKcUk1O34HeR4dyAZLk"
+  },
+  {
+    "__type__": "cc.CircleCollider",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 6
+    },
+    "_enabled": true,
+    "tag": 0,
+    "_offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_radius": 60,
+    "_id": "69JIm1uOVDHrJMZ2YSW6PF"
   },
   {
     "__type__": "cc.Canvas",

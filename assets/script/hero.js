@@ -111,5 +111,12 @@ cc.Class({
     },
     onKeyup (e) {
         Input[e.keyCode] = 0
+    },
+    // 碰撞回调试信息
+    onCollisionEnter (other, self) {
+        if (other.node.group === 'smog') { // 如果英雄视野的碰撞组件碰到的物体是 smog，才消除该物体
+            other.node.active = false
+            other.node.getComponent(cc.TiledTile).gid = 0
+        }
     }
 });

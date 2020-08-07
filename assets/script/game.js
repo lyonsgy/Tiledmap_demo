@@ -27,7 +27,8 @@ cc.Class({
         is_debug: false,
         gravity: cc.v2(0, 0), // 系统默认
         mapNode: cc.Node,
-        dialogNode: cc.Node
+        dialogNode: cc.Node,
+        smog_enabled: true
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -45,6 +46,10 @@ cc.Class({
         }
         // 重力加速度配置
         p.gravity = this.gravity
+
+        // 打开碰撞设置
+        cc.director.getCollisionManager().enabled = true
+        cc.director.getCollisionManager().enabledDebugDraw = this.is_debug
     },
 
     start () {
@@ -53,6 +58,8 @@ cc.Class({
             let tiledSize = tiledMap.getTileSize()
             let layer = tiledMap.getLayer('wall')
             let layerSize = layer.getLayerSize()
+            let smogLayer = tiledMap.getLayer('smog')
+            smogLayer.node.active = this.smog_enabled  // 打开战争迷雾
 
             for (let i = 0; i < layerSize.width; i++) {
                 // 水平方向的块数
@@ -67,6 +74,15 @@ cc.Class({
                         collider.offset = cc.v2(tiledSize.width / 2, tiledSize.height / 2)
                         collider.size = tiledSize
                         collider.apply()
+                    }
+
+                    // 给迷雾增加碰撞刚体
+                    tiled = smogLayer.getTiledTileAt(i, j, true)
+                    if (tiled.gid != 0) {
+                        tiled.node.group = 'smog'
+                        let collider = tiled.addComponent(cc.BoxCollider)
+                        collider.offset = cc.v2(tiledSize.width / 2, tiledSize.height / 2)
+                        collider.size = tiledSize
                     }
                 }
             }
