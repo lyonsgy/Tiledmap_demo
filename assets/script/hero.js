@@ -103,6 +103,11 @@ cc.Class({
 
     onKeyDown (e) {
         Input[e.keyCode] = 1
+
+        if (e.keyCode === cc.macro.KEY.space) {
+            let w_pos = this.node.convertToWorldSpaceAR(cc.v2(0, 0)) // 玩家当前位置的偏移量(自己坐标系)
+            console.log(w_pos.x, w_pos.y)
+        }
     },
     onKeyup (e) {
         Input[e.keyCode] = 0
