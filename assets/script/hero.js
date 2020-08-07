@@ -24,12 +24,13 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
+        speed: 200
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        this._speed = 200
+        this.speed = 400
         this.sp = cc.v2(0, 0)
 
         this.state = ''
@@ -75,10 +76,10 @@ cc.Class({
 
         if (this.sp.x) {
             this.lv.y = 0
-            this.lv.x = this.sp.x * this._speed
+            this.lv.x = this.sp.x * this.speed
         } else if (this.sp.y) {
             this.lv.x = 0
-            this.lv.y = this.sp.y * this._speed
+            this.lv.y = this.sp.y * this.speed
         } else {
             this.lv.x = this.lv.y = 0
         }

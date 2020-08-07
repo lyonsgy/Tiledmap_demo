@@ -26,7 +26,7 @@ cc.Class({
         // },
         is_debug: false,
         gravity: cc.v2(0, 0), // 系统默认
-        tiledMap: cc.TiledMap,
+        mapNode: cc.Node,
         dialogNode: cc.Node
     },
 
@@ -48,40 +48,45 @@ cc.Class({
     },
 
     start () {
-        let tiledSize = this.tiledMap.getTileSize()
-        let layer = this.tiledMap.getLayer('wall')
-        let layerSize = layer.getLayerSize()
+        for (let mapNode of this.mapNode.children) { // 遍历所有地图节点，绘制碰撞墙体
+            let tiledMap = mapNode.getComponent(cc.TiledMap)
+            let tiledSize = tiledMap.getTileSize()
+            let layer = tiledMap.getLayer('wall')
+            let layerSize = layer.getLayerSize()
 
-        for (let i = 0; i < layerSize.width; i++) {
-            // 水平方向的块数
-            for (let j = 0; j < layerSize.height; j++) {
-                // 垂直方向的块数
-                let tiled = layer.getTiledTileAt(i, j, true)
-                if (tiled.gid != 0) {
-                    tiled.node.group = 'wall'
-                    let body = tiled.node.addComponent(cc.RigidBody)
-                    body.type = cc.RigidBodyType.Static
-                    let collider = tiled.node.addComponent(cc.PhysicsBoxCollider)
-                    collider.offset = cc.v2(tiledSize.width / 2, tiledSize.height / 2)
-                    collider.size = tiledSize
-                    collider.apply()
+            for (let i = 0; i < layerSize.width; i++) {
+                // 水平方向的块数
+                for (let j = 0; j < layerSize.height; j++) {
+                    // 垂直方向的块数
+                    let tiled = layer.getTiledTileAt(i, j, true)
+                    if (tiled.gid != 0) {
+                        tiled.node.group = 'wall'
+                        let body = tiled.node.addComponent(cc.RigidBody)
+                        body.type = cc.RigidBodyType.Static
+                        let collider = tiled.node.addComponent(cc.PhysicsBoxCollider)
+                        collider.offset = cc.v2(tiledSize.width / 2, tiledSize.height / 2)
+                        collider.size = tiledSize
+                        collider.apply()
+                    }
                 }
             }
+
         }
 
+
         // 在对话框上层初始化对话
-        this.dialog = this.dialogNode.getComponent('dialog')
-        this.dialog.init([
-            { role: 2, content: '大家好，我是魔王' },
-            { role: 1, content: '大家好，我是勇者' },
-            { role: 2, content: '大家好，我是魔王。。' },
-            { role: 1, content: '大家好，我是勇者' },
-            { role: 2, content: '大家好，我是魔王。。。' },
-            { role: 1, content: '大家好，我是勇者' },
-            { role: 2, content: '大家好，我是魔王复读机' },
-            { role: 1, content: '大家好，我是勇者复读机' },
-            { role: 2, content: '。。。。。。' }
-        ])
+        // this.dialog = this.dialogNode.getComponent('dialog')
+        // this.dialog.init([
+        //     { role: 2, content: '大家好，我是魔王' },
+        //     { role: 1, content: '大家好，我是勇者' },
+        //     { role: 2, content: '大家好，我是魔王。。' },
+        //     { role: 1, content: '大家好，我是勇者' },
+        //     { role: 2, content: '大家好，我是魔王。。。' },
+        //     { role: 1, content: '大家好，我是勇者' },
+        //     { role: 2, content: '大家好，我是魔王复读机' },
+        //     { role: 1, content: '大家好，我是勇者复读机' },
+        //     { role: 2, content: '。。。。。。' }
+        // ])
     },
 
     // update (dt) {},
