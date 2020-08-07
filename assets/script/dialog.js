@@ -35,10 +35,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        this.init([
-            { role: 2, content: '大家好，我是魔王' },
-            { role: 1, content: '大家好，我是勇者' }
-        ])
+        window.dialog = this.node
         // 键盘控制对话
         cc.systemEvent.on('keydown', this.onKeyDown, this)
     },
@@ -59,15 +56,32 @@ cc.Class({
 
     },
 
-    // update (dt) {},
+    update (dt) {
+        if (!this.nowText) return
+        this.tt += dt
+        if (this.tt >= 0.1) {
+            if (this.textLabel.string.length < this.nowText.length) { // 逐行播放
+                this.textLabel.string = this.nowText.slice(0, this.textLabel.string.length + 1)
+            } else { // 播放完毕
+                this.textEnd = true
+                this.nowText = null
+            }
+            this.tt = 0
+        }
+    },
 
     init (textDataArr) {
+        this.nowText = null  // 当前播放文字
+        this.textEnd = true  // 是否播放完毕
+        this.tt = 0   //播放总时长
+
         this.textIndex = -1
         this.textDataArr = textDataArr
         this.node.active = true
         this.nextTextData()
     },
     nextTextData () {
+        if (!this.textEnd) return // 上一段对话没结束时不能进入下一段对话
         if (++this.textIndex < this.textDataArr.length) {
             // 还有对话没有显示
             this.setTextData(this.textDataArr[this.textIndex])
@@ -77,8 +91,13 @@ cc.Class({
     },
 
     setTextData (textData) {
+        if (!this.textEnd) return
+        this.textEnd = false
+
         this.nameLabel.string = roleMap[textData.role].name
-        this.textLabel.string = textData.content
+        this.textLabel.string = ''
+        this.nowText = textData.content
+
         cc.loader.loadRes(roleMap[textData.role].url, cc.SpriteFrame, (err, texture) => {
             this.picSprite.spriteFrame = texture
         })

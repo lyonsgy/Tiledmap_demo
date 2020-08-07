@@ -26,7 +26,8 @@ cc.Class({
         // },
         is_debug: false,
         gravity: cc.v2(0, 0), // 系统默认
-        tiledMap: cc.TiledMap
+        tiledMap: cc.TiledMap,
+        dialogNode: cc.Node
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -67,6 +68,20 @@ cc.Class({
                 }
             }
         }
+
+        // 在对话框上层初始化对话
+        this.dialog = this.dialogNode.getComponent('dialog')
+        this.dialog.init([
+            { role: 2, content: '大家好，我是魔王' },
+            { role: 1, content: '大家好，我是勇者' },
+            { role: 2, content: '大家好，我是魔王。。' },
+            { role: 1, content: '大家好，我是勇者' },
+            { role: 2, content: '大家好，我是魔王。。。' },
+            { role: 1, content: '大家好，我是勇者' },
+            { role: 2, content: '大家好，我是魔王复读机' },
+            { role: 1, content: '大家好，我是勇者复读机' },
+            { role: 2, content: '。。。。。。' }
+        ])
     },
 
     // update (dt) {},

@@ -50,6 +50,8 @@ cc.Class({
     },
 
     update (dt) {
+        if (window.dialog && window.dialog.active) return
+
         // 左右移动
         if (Input[cc.macro.KEY.a] || Input[cc.macro.KEY.left]) {
             this.sp.x = -1
