@@ -174,7 +174,7 @@
       "array": [
         0,
         0,
-        451.19923537169257,
+        452.3088304202914,
         0,
         0,
         0,
@@ -995,6 +995,9 @@
     "tiledMap": {
       "__id__": 16
     },
+    "dialogNode": {
+      "__id__": 26
+    },
     "_id": "9cDslwhxFHZaMEH042qQsO"
   },
   {
@@ -1215,9 +1218,7 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_spriteFrame": {
-      "__uuid__": "50b3bda6-be9d-479a-a708-1e31b9218959"
-    },
+    "_spriteFrame": null,
     "_type": 0,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -1342,8 +1343,8 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
-    "_string": "勇者",
-    "_N$string": "勇者",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 24,
     "_lineHeight": 26,
     "_enableWrapText": true,
@@ -1438,8 +1439,8 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
-    "_string": "这是文本框测试这是文本框测试这是文本框测试这是文本框测试这是文本框测试这是文本框测试这是文本框测试这是文本框测试这是文本框测试这是文本框测试这是文本框测试这是文本框测试这是文本框测试",
-    "_N$string": "这是文本框测试这是文本框测试这是文本框测试这是文本框测试这是文本框测试这是文本框测试这是文本框测试这是文本框测试这是文本框测试这是文本框测试这是文本框测试这是文本框测试这是文本框测试",
+    "_string": "",
+    "_N$string": "",
     "_fontSize": 20,
     "_lineHeight": 22,
     "_enableWrapText": true,
