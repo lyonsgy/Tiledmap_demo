@@ -4,6 +4,7 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
+const mapTool = require('mapTool')
 
 cc.Class({
     extends: cc.Component,
@@ -56,11 +57,8 @@ cc.Class({
         this.loadNode.active = true
 
         // 地图名称数组
-        let mapNameArr = [
-            ['00000', '01000', '00000'],
-            ['00010', '11110', '00100'],
-            ['00000', '10000', '00000']
-        ]
+        let mapNameArr = mapTool.getRandNameArr()
+        console.log(mapNameArr)
         this.initMap(mapNameArr)
     },
     // 根据地图名字数组生成地图
